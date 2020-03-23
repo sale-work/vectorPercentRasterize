@@ -28,6 +28,9 @@ class Rasterizer:
     outputCommandsFileHandle = 0
     currentReferenceTif = None
     currentTile = None
+    Xsize = 0
+    Ysize = 0
+    nominalSpatialResolution = 0
 
     def __init__(self, gdalDirPath):
         self.gdalRasterizePath = gdalDirPath + '/gdal_rasterize'
@@ -56,184 +59,187 @@ class Rasterizer:
         self.BdotClasses.append(BdotClass.BdotClass('KUKO', 20, "RODZAJ='parking'"))
 
     def fillTilesWithCounties(self):
-        self.tiles.append(Tile.Tile('34UED', "N:/BAMS/CaleMazowsze/training/34UED/training41_1_BUBD_75perc_mean_NDVI_LT_160_mean_RED_seg2_rec.tif"))
-        self.tiles[-1].addCounty(County.County('1408'))
-        self.tiles[-1].addCounty(County.County('1411'))
-        self.tiles[-1].addCounty(County.County('1412'))
-        self.tiles[-1].addCounty(County.County('1415'))
-        self.tiles[-1].addCounty(County.County('1416'))
-        self.tiles[-1].addCounty(County.County('1422'))
-        self.tiles[-1].addCounty(County.County('1424'))
-        self.tiles[-1].addCounty(County.County('1426'))
-        self.tiles[-1].addCounty(County.County('1429'))
-        self.tiles[-1].addCounty(County.County('1433'))
+
+        self.tiles.append(Tile.Tile('PLANET', "N:/BAMS/TIFF_selected/PS/mosaic_june_2018_utm_likeS2GLC.tif"))
         self.tiles[-1].addCounty(County.County('1434'))
-        self.tiles[-1].addCounty(County.County('1435'))
-        self.tiles[-1].addCounty(County.County('1461'))
-        self.tiles[-1].addCounty(County.County('1465'))
+        # self.tiles.append(Tile.Tile('34UED', "M:/mrybicki/S2GLC/post/34UED/resultClassificationAggreagtion_DivByAll.tif"))
+        # self.tiles[-1].addCounty(County.County('1408'))
+        # self.tiles[-1].addCounty(County.County('1411'))
+        # self.tiles[-1].addCounty(County.County('1412'))
+        # self.tiles[-1].addCounty(County.County('1415'))
+        # self.tiles[-1].addCounty(County.County('1416'))
+        # self.tiles[-1].addCounty(County.County('1422'))
+        # self.tiles[-1].addCounty(County.County('1424'))
+        # self.tiles[-1].addCounty(County.County('1426'))
+        # self.tiles[-1].addCounty(County.County('1429'))
+        # self.tiles[-1].addCounty(County.County('1433'))
+        # self.tiles[-1].addCounty(County.County('1434'))
+        # self.tiles[-1].addCounty(County.County('1435'))
+        # self.tiles[-1].addCounty(County.County('1461'))
+        # self.tiles[-1].addCounty(County.County('1465'))
+        #
+        # self.tiles.append(Tile.Tile('34UCD', "E:/34UCD_sample.tif"))
+        # self.tiles[-1].addCounty(County.County('1404'))
+        # self.tiles[-1].addCounty(County.County('1419'))
+        # self.tiles[-1].addCounty(County.County('1427'))
+        # self.tiles[-1].addCounty(County.County('0461'))
+        # self.tiles[-1].addCounty(County.County('0463'))
+        # self.tiles[-1].addCounty(County.County('0464'))
+        # self.tiles[-1].addCounty(County.County('0401'))
+        # self.tiles[-1].addCounty(County.County('0402'))
+        # self.tiles[-1].addCounty(County.County('0405'))
+        # self.tiles[-1].addCounty(County.County('0407'))
+        # self.tiles[-1].addCounty(County.County('0408'))
+        # self.tiles[-1].addCounty(County.County('0411'))
+        # self.tiles[-1].addCounty(County.County('0412'))
+        # self.tiles[-1].addCounty(County.County('0415'))
+        # self.tiles[-1].addCounty(County.County('0418'))
+        # self.tiles[-1].addCounty(County.County('1002'))
+        #
+        # self.tiles.append(Tile.Tile('34UDB', "M:/mrybicki/S2GLC/post/34UDB/resultClassificationAggreagtion_DivByAll.tif"))
+        # self.tiles[-1].addCounty(County.County('1423'))
+        # self.tiles[-1].addCounty(County.County('1425'))
+        # self.tiles[-1].addCounty(County.County('1430'))
+        # self.tiles[-1].addCounty(County.County('1463'))
+        # self.tiles[-1].addCounty(County.County('1062'))
+        # self.tiles[-1].addCounty(County.County('1007'))
+        # self.tiles[-1].addCounty(County.County('1010'))
+        # self.tiles[-1].addCounty(County.County('1012'))
+        # self.tiles[-1].addCounty(County.County('2661'))
+        # self.tiles[-1].addCounty(County.County('2601'))
+        # self.tiles[-1].addCounty(County.County('2602'))
+        # self.tiles[-1].addCounty(County.County('2604'))
+        # self.tiles[-1].addCounty(County.County('2605'))
+        # self.tiles[-1].addCounty(County.County('2608'))
+        # self.tiles[-1].addCounty(County.County('2610'))
+        # self.tiles[-1].addCounty(County.County('2611'))
+        # self.tiles[-1].addCounty(County.County('2613'))
+        #
+        # self.tiles.append(Tile.Tile('34UDC', "M:/mrybicki/S2GLC/post/34UDC/resultClassificationAggreagtion_DivByAll.tif"))
+        # self.tiles[-1].addCounty(County.County('1401'))
+        # self.tiles[-1].addCounty(County.County('1405'))
+        # self.tiles[-1].addCounty(County.County('1406'))
+        # self.tiles[-1].addCounty(County.County('1418'))
+        # self.tiles[-1].addCounty(County.County('1421'))
+        # self.tiles[-1].addCounty(County.County('1423'))
+        # self.tiles[-1].addCounty(County.County('1425'))
+        # self.tiles[-1].addCounty(County.County('1428'))
+        # self.tiles[-1].addCounty(County.County('1432'))
+        # self.tiles[-1].addCounty(County.County('1438'))
+        # self.tiles[-1].addCounty(County.County('1463'))
+        # self.tiles[-1].addCounty(County.County('1465'))
+        # self.tiles[-1].addCounty(County.County('1062'))
+        # self.tiles[-1].addCounty(County.County('1063'))
+        # self.tiles[-1].addCounty(County.County('1005'))
+        # self.tiles[-1].addCounty(County.County('1013'))
+        # self.tiles[-1].addCounty(County.County('1015'))
+        # self.tiles[-1].addCounty(County.County('1016'))
+        #
+        # self.tiles.append(Tile.Tile('34UDD', "M:/mrybicki/S2GLC/post/34UDD/resultClassificationAggreagtion_DivByAll.tif"))
+        # self.tiles[-1].addCounty(County.County('1402'))
+        # self.tiles[-1].addCounty(County.County('1404'))
+        # self.tiles[-1].addCounty(County.County('1408'))
+        # self.tiles[-1].addCounty(County.County('1411'))
+        # self.tiles[-1].addCounty(County.County('1413'))
+        # self.tiles[-1].addCounty(County.County('1414'))
+        # self.tiles[-1].addCounty(County.County('1419'))
+        # self.tiles[-1].addCounty(County.County('1420'))
+        # self.tiles[-1].addCounty(County.County('1422'))
+        # self.tiles[-1].addCounty(County.County('1424'))
+        # self.tiles[-1].addCounty(County.County('1427'))
+        # self.tiles[-1].addCounty(County.County('1428'))
+        # self.tiles[-1].addCounty(County.County('1432'))
+        # self.tiles[-1].addCounty(County.County('1437'))
+        # self.tiles[-1].addCounty(County.County('1462'))
+        # self.tiles[-1].addCounty(County.County('1465'))
+        #
+        # self.tiles.append(Tile.Tile('34UDE', "M:/mrybicki/S2GLC/post/34UDE/resultClassificationAggreagtion_DivByAll.tif"))
+        # self.tiles[-1].addCounty(County.County('1413'))
+        # self.tiles[-1].addCounty(County.County('1422'))
+        # self.tiles[-1].addCounty(County.County('1437'))
+        # self.tiles[-1].addCounty(County.County('0402'))
+        # self.tiles[-1].addCounty(County.County('2862'))
+        # self.tiles[-1].addCounty(County.County('2803'))
+        # self.tiles[-1].addCounty(County.County('2804'))
+        # self.tiles[-1].addCounty(County.County('2807'))
+        # self.tiles[-1].addCounty(County.County('2809'))
+        # self.tiles[-1].addCounty(County.County('2811'))
+        # self.tiles[-1].addCounty(County.County('2812'))
+        # self.tiles[-1].addCounty(County.County('2814'))
+        # self.tiles[-1].addCounty(County.County('2815'))
+        # self.tiles[-1].addCounty(County.County('2817'))
+        #
+        # self.tiles.append(Tile.Tile('34UEB', "M:/mrybicki/S2GLC/post/34UEB/resultClassificationAggreagtion_DivByAll.tif"))
+        # self.tiles[-1].addCounty(County.County('1409'))
+        # self.tiles[-1].addCounty(County.County('1425'))
+        # self.tiles[-1].addCounty(County.County('1430'))
+        # self.tiles[-1].addCounty(County.County('1436'))
+        # self.tiles[-1].addCounty(County.County('1463'))
+        # self.tiles[-1].addCounty(County.County('0663'))
+        # self.tiles[-1].addCounty(County.County('0605'))
+        # self.tiles[-1].addCounty(County.County('0607'))
+        # self.tiles[-1].addCounty(County.County('0609'))
+        # self.tiles[-1].addCounty(County.County('0612'))
+        # self.tiles[-1].addCounty(County.County('0614'))
+        # self.tiles[-1].addCounty(County.County('2606'))
+        # self.tiles[-1].addCounty(County.County('2607'))
+        # self.tiles[-1].addCounty(County.County('2609'))
+        # self.tiles[-1].addCounty(County.County('2611'))
+        # self.tiles[-1].addCounty(County.County('2612'))
 
-        self.tiles.append(Tile.Tile('34UCD', "F:/MarcinRybicki/projects/BAMS/rasterize/workspace/34UCD.tif"))
-        self.tiles[-1].addCounty(County.County('1404'))
-        self.tiles[-1].addCounty(County.County('1419'))
-        self.tiles[-1].addCounty(County.County('1427'))
-        self.tiles[-1].addCounty(County.County('0461'))
-        self.tiles[-1].addCounty(County.County('0463'))
-        self.tiles[-1].addCounty(County.County('0464'))
-        self.tiles[-1].addCounty(County.County('0401'))
-        self.tiles[-1].addCounty(County.County('0402'))
-        self.tiles[-1].addCounty(County.County('0405'))
-        self.tiles[-1].addCounty(County.County('0407'))
-        self.tiles[-1].addCounty(County.County('0408'))
-        self.tiles[-1].addCounty(County.County('0411'))
-        self.tiles[-1].addCounty(County.County('0412'))
-        self.tiles[-1].addCounty(County.County('0415'))
-        self.tiles[-1].addCounty(County.County('0418'))
-        self.tiles[-1].addCounty(County.County('1002'))
-
-        self.tiles.append(Tile.Tile('34UDB', "N:/BAMS/CaleMazowsze/training/34UDB/training_34UDB_rec.tif"))
-        self.tiles[-1].addCounty(County.County('1423'))
-        self.tiles[-1].addCounty(County.County('1425'))
-        self.tiles[-1].addCounty(County.County('1430'))
-        self.tiles[-1].addCounty(County.County('1463'))
-        self.tiles[-1].addCounty(County.County('1062'))
-        self.tiles[-1].addCounty(County.County('1007'))
-        self.tiles[-1].addCounty(County.County('1010'))
-        self.tiles[-1].addCounty(County.County('1012'))
-        self.tiles[-1].addCounty(County.County('2661'))
-        self.tiles[-1].addCounty(County.County('2601'))
-        self.tiles[-1].addCounty(County.County('2602'))
-        self.tiles[-1].addCounty(County.County('2604'))
-        self.tiles[-1].addCounty(County.County('2605'))
-        self.tiles[-1].addCounty(County.County('2608'))
-        self.tiles[-1].addCounty(County.County('2610'))
-        self.tiles[-1].addCounty(County.County('2611'))
-        self.tiles[-1].addCounty(County.County('2613'))
-
-        self.tiles.append(Tile.Tile('34UDC', "N:/BAMS/CaleMazowsze/training/34UDC/training_34UDC_rec.tif"))
-        self.tiles[-1].addCounty(County.County('1401'))
-        self.tiles[-1].addCounty(County.County('1405'))
-        self.tiles[-1].addCounty(County.County('1406'))
-        self.tiles[-1].addCounty(County.County('1418'))
-        self.tiles[-1].addCounty(County.County('1421'))
-        self.tiles[-1].addCounty(County.County('1423'))
-        self.tiles[-1].addCounty(County.County('1425'))
-        self.tiles[-1].addCounty(County.County('1428'))
-        self.tiles[-1].addCounty(County.County('1432'))
-        self.tiles[-1].addCounty(County.County('1438'))
-        self.tiles[-1].addCounty(County.County('1463'))
-        self.tiles[-1].addCounty(County.County('1465'))
-        self.tiles[-1].addCounty(County.County('1062'))
-        self.tiles[-1].addCounty(County.County('1063'))
-        self.tiles[-1].addCounty(County.County('1005'))
-        self.tiles[-1].addCounty(County.County('1013'))
-        self.tiles[-1].addCounty(County.County('1015'))
-        self.tiles[-1].addCounty(County.County('1016'))
-
-        self.tiles.append(Tile.Tile('34UDD', "N:/BAMS/CaleMazowsze/training/34UDD/training_34UDD_rec.tif"))
-        self.tiles[-1].addCounty(County.County('1402'))
-        self.tiles[-1].addCounty(County.County('1404'))
-        self.tiles[-1].addCounty(County.County('1408'))
-        self.tiles[-1].addCounty(County.County('1411'))
-        self.tiles[-1].addCounty(County.County('1413'))
-        self.tiles[-1].addCounty(County.County('1414'))
-        self.tiles[-1].addCounty(County.County('1419'))
-        self.tiles[-1].addCounty(County.County('1420'))
-        self.tiles[-1].addCounty(County.County('1422'))
-        self.tiles[-1].addCounty(County.County('1424'))
-        self.tiles[-1].addCounty(County.County('1427'))
-        self.tiles[-1].addCounty(County.County('1428'))
-        self.tiles[-1].addCounty(County.County('1432'))
-        self.tiles[-1].addCounty(County.County('1437'))
-        self.tiles[-1].addCounty(County.County('1462'))
-        self.tiles[-1].addCounty(County.County('1465'))
-
-        self.tiles.append(Tile.Tile('34UDE', "N:/BAMS/CaleMazowsze/training/34UDE/training_34UDE_rec.tif"))
-        self.tiles[-1].addCounty(County.County('1413'))
-        self.tiles[-1].addCounty(County.County('1422'))
-        self.tiles[-1].addCounty(County.County('1437'))
-        self.tiles[-1].addCounty(County.County('0402'))
-        self.tiles[-1].addCounty(County.County('2862'))
-        self.tiles[-1].addCounty(County.County('2803'))
-        self.tiles[-1].addCounty(County.County('2804'))
-        self.tiles[-1].addCounty(County.County('2807'))
-        self.tiles[-1].addCounty(County.County('2809'))
-        self.tiles[-1].addCounty(County.County('2811'))
-        self.tiles[-1].addCounty(County.County('2812'))
-        self.tiles[-1].addCounty(County.County('2814'))
-        self.tiles[-1].addCounty(County.County('2815'))
-        self.tiles[-1].addCounty(County.County('2817'))
-
-        self.tiles.append(Tile.Tile('34UEB', "N:/BAMS/CaleMazowsze/training/34UEB/training_34UEB_rec.tif"))
-        self.tiles[-1].addCounty(County.County('1409'))
-        self.tiles[-1].addCounty(County.County('1425'))
-        self.tiles[-1].addCounty(County.County('1430'))
-        self.tiles[-1].addCounty(County.County('1436'))
-        self.tiles[-1].addCounty(County.County('1463'))
-        self.tiles[-1].addCounty(County.County('0663'))
-        self.tiles[-1].addCounty(County.County('0605'))
-        self.tiles[-1].addCounty(County.County('0607'))
-        self.tiles[-1].addCounty(County.County('0609'))
-        self.tiles[-1].addCounty(County.County('0612'))
-        self.tiles[-1].addCounty(County.County('0614'))
-        self.tiles[-1].addCounty(County.County('2606'))
-        self.tiles[-1].addCounty(County.County('2607'))
-        self.tiles[-1].addCounty(County.County('2609'))
-        self.tiles[-1].addCounty(County.County('2611'))
-        self.tiles[-1].addCounty(County.County('2612'))
-
-        self.tiles.append(Tile.Tile('34UEC', "N:/BAMS/CaleMazowsze/training/34UEC/training_34UEC_rec.tif"))
-        self.tiles[-1].addCounty(County.County('1401'))
-        self.tiles[-1].addCounty(County.County('1403'))
-        self.tiles[-1].addCounty(County.County('1406'))
-        self.tiles[-1].addCounty(County.County('1407'))
-        self.tiles[-1].addCounty(County.County('1412'))
-        self.tiles[-1].addCounty(County.County('1417'))
-        self.tiles[-1].addCounty(County.County('1418'))
-        self.tiles[-1].addCounty(County.County('1425'))
-        self.tiles[-1].addCounty(County.County('1426'))
-        self.tiles[-1].addCounty(County.County('1433'))
-        self.tiles[-1].addCounty(County.County('1434'))
-        self.tiles[-1].addCounty(County.County('1436'))
-        self.tiles[-1].addCounty(County.County('1463'))
-        self.tiles[-1].addCounty(County.County('1464'))
-        self.tiles[-1].addCounty(County.County('1465'))
-        self.tiles[-1].addCounty(County.County('0611'))
-        self.tiles[-1].addCounty(County.County('0614'))
-        self.tiles[-1].addCounty(County.County('0616'))
-
-        self.tiles.append(Tile.Tile('34UEE', "N:/BAMS/CaleMazowsze/training/34UEE/training_34UEE_rec.tif"))
-        self.tiles[-1].addCounty(County.County('1415'))
-        self.tiles[-1].addCounty(County.County('1422'))
-        self.tiles[-1].addCounty(County.County('2062'))
-        self.tiles[-1].addCounty(County.County('2004'))
-        self.tiles[-1].addCounty(County.County('2006'))
-        self.tiles[-1].addCounty(County.County('2007'))
-        self.tiles[-1].addCounty(County.County('2805'))
-        self.tiles[-1].addCounty(County.County('2806'))
-        self.tiles[-1].addCounty(County.County('2810'))
-        self.tiles[-1].addCounty(County.County('2816'))
-        self.tiles[-1].addCounty(County.County('2817'))
-
-        self.tiles.append(Tile.Tile('34UFC', "N:/BAMS/CaleMazowsze/training/34UFC/training_34UFC_rec.tif"))
-        self.tiles[-1].addCounty(County.County('1410'))
-        self.tiles[-1].addCounty(County.County('1426'))
-        self.tiles[-1].addCounty(County.County('0661'))
-        self.tiles[-1].addCounty(County.County('0601'))
-        self.tiles[-1].addCounty(County.County('0608'))
-        self.tiles[-1].addCounty(County.County('0611'))
-        self.tiles[-1].addCounty(County.County('0613'))
-        self.tiles[-1].addCounty(County.County('0615'))
-        self.tiles[-1].addCounty(County.County('0619'))
-
-        self.tiles.append(Tile.Tile('34UFD', "N:/BAMS/CaleMazowsze/training/34UFD/training_34UFD_rec.tif"))
-        self.tiles[-1].addCounty(County.County('1410'))
-        self.tiles[-1].addCounty(County.County('1426'))
-        self.tiles[-1].addCounty(County.County('2061'))
-        self.tiles[-1].addCounty(County.County('2002'))
-        self.tiles[-1].addCounty(County.County('2003'))
-        self.tiles[-1].addCounty(County.County('2005'))
-        self.tiles[-1].addCounty(County.County('2010'))
-        self.tiles[-1].addCounty(County.County('2013'))
+        # self.tiles.append(Tile.Tile('34UEC', "M:/mrybicki/S2GLC/post/34UEC/resultClassificationAggreagtion_DivByAll.tif"))
+        # self.tiles[-1].addCounty(County.County('1401'))
+        # self.tiles[-1].addCounty(County.County('1403'))
+        # self.tiles[-1].addCounty(County.County('1406'))
+        # self.tiles[-1].addCounty(County.County('1407'))
+        # self.tiles[-1].addCounty(County.County('1412'))
+        # self.tiles[-1].addCounty(County.County('1417'))
+        # self.tiles[-1].addCounty(County.County('1418'))
+        # self.tiles[-1].addCounty(County.County('1425'))
+        # self.tiles[-1].addCounty(County.County('1426'))
+        # self.tiles[-1].addCounty(County.County('1433'))
+        # self.tiles[-1].addCounty(County.County('1434'))
+        # self.tiles[-1].addCounty(County.County('1436'))
+        # self.tiles[-1].addCounty(County.County('1463'))
+        # self.tiles[-1].addCounty(County.County('1464'))
+        # self.tiles[-1].addCounty(County.County('1465'))
+        # self.tiles[-1].addCounty(County.County('0611'))
+        # self.tiles[-1].addCounty(County.County('0614'))
+        # self.tiles[-1].addCounty(County.County('0616'))
+        #
+        # self.tiles.append(Tile.Tile('34UEE', "M:/mrybicki/S2GLC/post/34UEE/resultClassificationAggreagtion_DivByAll.tif"))
+        # self.tiles[-1].addCounty(County.County('1415'))
+        # self.tiles[-1].addCounty(County.County('1422'))
+        # self.tiles[-1].addCounty(County.County('2062'))
+        # self.tiles[-1].addCounty(County.County('2004'))
+        # self.tiles[-1].addCounty(County.County('2006'))
+        # self.tiles[-1].addCounty(County.County('2007'))
+        # self.tiles[-1].addCounty(County.County('2805'))
+        # self.tiles[-1].addCounty(County.County('2806'))
+        # self.tiles[-1].addCounty(County.County('2810'))
+        # self.tiles[-1].addCounty(County.County('2816'))
+        # self.tiles[-1].addCounty(County.County('2817'))
+        #
+        # self.tiles.append(Tile.Tile('34UFC', "M:/mrybicki/S2GLC/post/34UFC/resultClassificationAggreagtion_DivByAll.tif"))
+        # self.tiles[-1].addCounty(County.County('1410'))
+        # self.tiles[-1].addCounty(County.County('1426'))
+        # self.tiles[-1].addCounty(County.County('0661'))
+        # self.tiles[-1].addCounty(County.County('0601'))
+        # self.tiles[-1].addCounty(County.County('0608'))
+        # self.tiles[-1].addCounty(County.County('0611'))
+        # self.tiles[-1].addCounty(County.County('0613'))
+        # self.tiles[-1].addCounty(County.County('0615'))
+        # self.tiles[-1].addCounty(County.County('0619'))
+        #
+        # self.tiles.append(Tile.Tile('34UFD', "M:/mrybicki/S2GLC/post/34UFD/resultClassificationAggreagtion_DivByAll.tif"))
+        # self.tiles[-1].addCounty(County.County('1410'))
+        # self.tiles[-1].addCounty(County.County('1426'))
+        # self.tiles[-1].addCounty(County.County('2061'))
+        # self.tiles[-1].addCounty(County.County('2002'))
+        # self.tiles[-1].addCounty(County.County('2003'))
+        # self.tiles[-1].addCounty(County.County('2005'))
+        # self.tiles[-1].addCounty(County.County('2010'))
+        # self.tiles[-1].addCounty(County.County('2013'))
 
     def prepareData(self, workdir, inputRaster, bdotMainDirPath, percent, outputRaster):
         self.workdir = workdir
@@ -251,12 +257,26 @@ class Rasterizer:
     def doRasterize(self):
         for t in self.tiles:
             self.currentTile = t
+            self.outputRaster = self.outputRaster + self.currentTile.name + '.tif'
             self.doRasterizeForTile(t)
             #return
         self.outputCommandsFileHandle.close()
 
+    def getNominalSize(self):
+        # if self.Xsize > 0 and self.Ysize > 0:
+        return self.Ysize, self.Xsize
+
+    def getNominalSpatialResolution(self):
+        dataset = gdal.Open(self.currentReferenceTif, gdal.GA_ReadOnly)
+        if not dataset:
+            print("Cannot open " + self.currentReferenceTif)
+        self.geotransform = dataset.GetGeoTransform()
+        self.nominalSpatialResolution = self.geotransform[1]
+        dataset = None
+        return self.nominalSpatialResolution
+
     def doRasterizeForTile(self, tile):
-        self.resultPath = self.workdir + '/trainingRaster_' + tile.name + '.tif'
+        self.resultPath = self.workdir + '/2019trainingRaster_' + tile.name + '.tif'
         self.currentReferenceTif = tile.exampleImage
         print('create1PercentImage')
         self.create1PercentImage(tile.exampleImage)
@@ -273,8 +293,10 @@ class Rasterizer:
         self.clearTempData()
 
     def create1PercentImage(self, inputRaster):
-        #TODO: chcange rigid 1 1 in metres for auto
-        command = self.gdalTranslatePath + ' ' '-tr 1 1 -ot Byte -co "COMPRESS=LZW" ' + inputRaster + ' ' + self.temp1percentRasterPath
+        nominalSpatialRes = self.getNominalSpatialResolution()
+        onePerSpatRes = float(nominalSpatialRes) / 10
+        strOnePerSpatialRes = str(onePerSpatRes) + ' ' + str(onePerSpatRes)
+        command = self.gdalTranslatePath + ' ' '-tr ' + strOnePerSpatialRes + ' -ot Byte -co "COMPRESS=LZW" ' + inputRaster + ' ' + self.temp1percentRasterPath
         self.runSystemProcess(command)
         self.zeros1PercentImage()
 
@@ -303,6 +325,7 @@ class Rasterizer:
             command = command + ' -where "' + detailedQuery + '"'
         command = command + ' ' + shpPath + ' ' + self.temp1percentRasterPath
         self.runSystemProcess(command)
+        a=3
 
     def burnShpOnNormalImage(self, shpPath, value, detailedQuery=''):
         command = self.gdalRasterizePath + ' -burn ' + str(value)
@@ -316,7 +339,10 @@ class Rasterizer:
             for bdotClass in self.BdotClasses:
                 if bdotClass.number == 1:
                     shpFile = PathsManager.FindShpFileForCountyAndClass(self.bdotMainDirPath, county, bdotClass)
-                    self.burnShpOn1percentImage(shpFile, bdotClass.number, bdotClass.detailedQuery)
+                    if len(shpFile) > 1:
+                        self.burnShpOn1percentImage(shpFile, bdotClass.number, bdotClass.detailedQuery)
+                    else:
+                        print('No file for class ' + str(bdotClass) + ' for county: ' + str(county.BDOTnumber))
 
     def rasterizeTileOnNormalImage(self, tile):
         for county in tile.counties:
@@ -326,16 +352,26 @@ class Rasterizer:
                     self.burnShpOnNormalImage(shpFile, bdotClass.number, bdotClass.detailedQuery)
 
     def clearTempData(self):
-        command = "del /f " + self.temp1percentRasterPath
-        self.runSystemProcess(command)
-        #os.remove(self.temp1percentRasterPath)
+        #command = "del /f " + self.temp1percentRasterPath
+        #self.runSystemProcess(command)
+        os.remove(self.temp1percentRasterPath)
+        dbfFile = "F:/MarcinRybicki/codes/BAMS/vectorPercentRasterize/workdir/frame.dbf"
+        prjFile = "F:/MarcinRybicki/codes/BAMS/vectorPercentRasterize/workdir/frame.prj"
+        shxFile = "F:/MarcinRybicki/codes/BAMS/vectorPercentRasterize/workdir/frame.shx"
+        shpFile = "F:/MarcinRybicki/codes/BAMS/vectorPercentRasterize/workdir/frame.shp"
+        try:
+            os.remove(dbfFile)
+            os.remove(prjFile)
+            os.remove(shxFile)
+            os.remove(shpFile)
+        except:
+            print('Error while deleting a file.')
 
     def runSystemProcess(self, command):
-        #TODO
         if not self.outputCommandsFileHandle.closed:
             self.outputCommandsFileHandle.write(command)
             self.outputCommandsFileHandle.write('\n')
-        #print(command)
+        print(command)
         os.system((command))
 
     def sumDownsamplingRasterizedImage(self):
@@ -377,6 +413,8 @@ class Rasterizer:
             print("Cannot open " + rasterPath)
         band = dataset.GetRasterBand(1)
         wholeImage = band.ReadAsArray(xoff=0, yoff=0, win_xsize=band.XSize, win_ysize=band.YSize)
+        self.Xsize = band.XSize
+        self.Ysize= band.YSize
 
         return wholeImage
 
@@ -387,7 +425,7 @@ class Rasterizer:
         summedImage = None
         driver = gdal.GetDriverByName("GTiff")
         dst_filename =self.resultPath
-        dst_ds = driver.Create(dst_filename, xsize=int(10980), ysize=int(10980), bands=1, eType=gdal.GDT_Byte)
+        dst_ds = driver.Create(dst_filename, xsize=int(self.Xsize), ysize=int(self.Ysize), bands=1, eType=gdal.GDT_Byte)
         dst_ds.SetGeoTransform(self.geotransform)
         dst_ds.SetProjection(self.projection)
         dst_ds.GetRasterBand(1).WriteArray(normalImage)
