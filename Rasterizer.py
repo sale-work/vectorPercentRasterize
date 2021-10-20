@@ -684,7 +684,6 @@ class Rasterizer:
         dst_ds = None
 
     def readRaster(self, rasterPath):
-        #rasterPath = "F:/MarcinRybicki/codes/BAMS/vectorPercentRasterize/workdir/wycinek/tempWycinek.tif"
         dataset = gdal.Open(rasterPath, gdal.GA_ReadOnly)
         if not dataset:
             print("Cannot open " + rasterPath)
