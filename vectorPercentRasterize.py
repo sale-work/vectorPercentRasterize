@@ -4,11 +4,11 @@ import Rasterizer
 
 
 def main(argv):
-    bdotMainDirPath = "H://S2GLC//data//bdot//bdot"
-    inputPercent = 1
+    bdotMainDirPath = "G:/_temp/BDOT_to_samples/bdot"
+    inputPercent = 100
 
-    gdalDirPath = 'F:/OSGeo4W64/bin'
-    workingDir = 'F:/MarcinRybicki/codes/BAMS/vectorPercentRasterize/workdir/s2glc2020ForValidation'
+    gdalDirPath = 'C:/OSGeo4W64/bin'
+    workingDir = 'G:/_temp/BDOT_to_samples'
     r = Rasterizer.Rasterizer(gdalDirPath)
     r.prepareData(workingDir, bdotMainDirPath, inputPercent)
     r.doRasterize()

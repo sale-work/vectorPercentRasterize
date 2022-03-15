@@ -1,4 +1,4 @@
-import gdal
+from osgeo import gdal
 import numpy as np
 import os
 from pathlib import Path
@@ -41,42 +41,50 @@ class Rasterizer:
         self.fillTilesWithCounties()
 
     def fillBdotClasses(self):
-        self.BdotClasses.append(BdotClass.BdotClass('BUBD', 1))
+        self.BdotClasses.append(BdotClass.BdotClass('BUBD', 62))
+        # self.BdotClasses.append(BdotClass.BdotClass('PTKM', 62))
+        # self.BdotClasses.append(BdotClass.BdotClass('SKDR', 62))
+        # self.BdotClasses.append(BdotClass.BdotClass('OIMK', 105))
+        # self.BdotClasses.append(BdotClass.BdotClass('OISZ', 105))
+        #
+        # self.BdotClasses.append(BdotClass.BdotClass('PTRK', 103))
+        # self.BdotClasses.append(BdotClass.BdotClass('PTTR', 102, "X_KOD ='PTTR01'"))
+        # self.BdotClasses.append(BdotClass.BdotClass('PTTR', 73, "X_KOD ='PTTR02'"))
+        # self.BdotClasses.append(BdotClass.BdotClass('PTLZ', 83, "RODZAJ='Las' and KATEGORIA='lisciasty'"))
+        # #
+        # self.BdotClasses.append(BdotClass.BdotClass('PTLZ', 83, "RODZAJ='Las' and KATEGORIA='iglasty'"))
+        # self.BdotClasses.append(BdotClass.BdotClass('PTWP', 162))
+        # #
+        # self.BdotClasses.append(BdotClass.BdotClass('PTGN', 121)) #, "rodzaj='piargUsypiskoRumowiskoSkalne'"
+        # self.BdotClasses.append(BdotClass.BdotClass('PTWZ', 121, "X_KOD ='PTWZ01'"))
+        ###
+        # self.BdotClasses.append(BdotClass.BdotClass('PTWP', 3))
+        #
+        # self.BdotClasses.append(BdotClass.BdotClass('BUCM', 21))
+        # self.BdotClasses.append(BdotClass.BdotClass('BUSP', 21))
+        # self.BdotClasses.append(BdotClass.BdotClass('KUKO', 21))
+        # self.BdotClasses.append(BdotClass.BdotClass('OIKM', 21))
+        #
+        # self.BdotClasses.append(BdotClass.BdotClass('PTPL', 21))
+        # self.BdotClasses.append(BdotClass.BdotClass('BUIB', 21))
+        # self.BdotClasses.append(BdotClass.BdotClass('PTLZ', 20))
 
-        self.BdotClasses.append(BdotClass.BdotClass('PTWP', 3))
 
-        self.BdotClasses.append(BdotClass.BdotClass('BUCM', 21))
-        self.BdotClasses.append(BdotClass.BdotClass('BUSP', 21))
-        self.BdotClasses.append(BdotClass.BdotClass('KUKO', 21))
-        self.BdotClasses.append(BdotClass.BdotClass('OIKM', 21))
-        self.BdotClasses.append(BdotClass.BdotClass('PTKM', 21))
-        self.BdotClasses.append(BdotClass.BdotClass('PTPL', 21))
-        self.BdotClasses.append(BdotClass.BdotClass('BUIB', 21))
-
-        self.BdotClasses.append(BdotClass.BdotClass('OIMK', 20))
-        self.BdotClasses.append(BdotClass.BdotClass('OISZ', 20))
-        self.BdotClasses.append(BdotClass.BdotClass('PTLZ', 20))
-        self.BdotClasses.append(BdotClass.BdotClass('PTRK', 20))
-        self.BdotClasses.append(BdotClass.BdotClass('PTTR', 20))
-        self.BdotClasses.append(BdotClass.BdotClass('PTUT', 20))
-        self.BdotClasses.append(BdotClass.BdotClass('KUKO', 20, "RODZAJ='parking'"))
+        # self.BdotClasses.append(BdotClass.BdotClass('PTUT', 20))
+        # self.BdotClasses.append(BdotClass.BdotClass('KUKO', 20, "RODZAJ='parking'"))
 
         # self.BdotClasses.append(BdotClass.BdotClass('BUBD', 1))
         # self.BdotClasses.append(BdotClass.BdotClass('OIKM', 2))
         # self.BdotClasses.append(BdotClass.BdotClass('OISZ', 3))
         #
-        # self.BdotClasses.append(BdotClass.BdotClass('PTLZ', 4, "rodzaj='Las' and kategoria='L'"))
-        #
-        # self.BdotClasses.append(BdotClass.BdotClass('PTLZ', 5, "rodzaj='Las' and kategoria='I'"))
+
         #
         # self.BdotClasses.append(BdotClass.BdotClass('PTPL', 6))
         #
         # self.BdotClasses.append(BdotClass.BdotClass('PTTR', 7, "rodzaj='Gr'"))
         # self.BdotClasses.append(BdotClass.BdotClass('PTTR', 8, "rodzaj='Rt'"))
         #
-        # self.BdotClasses.append(BdotClass.BdotClass('PTWP', 9))
-        #
-        # # self.BdotClasses.append(BdotClass.BdotClass('PTGN', 10, "rodzaj='piargUsypiskoRumowiskoSkalne'"))
+
         # # self.BdotClasses.append(BdotClass.BdotClass('PTGN', 10, "rodzaj='terenKamienisty'"))
         # # self.BdotClasses.append(BdotClass.BdotClass('PTGN', 10, "rodzaj='terenPiaszczystyZwirowy'"))
         #
@@ -446,52 +454,52 @@ class Rasterizer:
         # self.tiles[-1].addCounty(County.County('2601'))
         # self.tiles[-1].addCounty(County.County('2604'))
 
-        # self.tiles.append(Tile.Tile('34UED', "N:/S2GLCextension/S2glcPoland2020/data/LC_DB/CLCFilteredByHRL/34UED.tif"))
-        # self.tiles[-1].addCounty(County.County('1433'))
-        # self.tiles[-1].addCounty(County.County('1461'))
-        # self.tiles[-1].addCounty(County.County('2003'))
-        # self.tiles[-1].addCounty(County.County('1416'))
-        # self.tiles[-1].addCounty(County.County('1426'))
-        # self.tiles[-1].addCounty(County.County('1435'))
-        # self.tiles[-1].addCounty(County.County('1411'))
-        # self.tiles[-1].addCounty(County.County('1412'))
-        # self.tiles[-1].addCounty(County.County('2010'))
-        # self.tiles[-1].addCounty(County.County('1429'))
-        # self.tiles[-1].addCounty(County.County('2013'))
-        # self.tiles[-1].addCounty(County.County('1408'))
-        # self.tiles[-1].addCounty(County.County('1424'))
-        # self.tiles[-1].addCounty(County.County('1465'))
-        # self.tiles[-1].addCounty(County.County('1434'))
-        # self.tiles[-1].addCounty(County.County('2062'))
-        # self.tiles[-1].addCounty(County.County('1422'))
-        # self.tiles[-1].addCounty(County.County('2006'))
-        # self.tiles[-1].addCounty(County.County('2002'))
-        # self.tiles[-1].addCounty(County.County('2014'))
-        # self.tiles[-1].addCounty(County.County('2008'))
-        # self.tiles[-1].addCounty(County.County('2007'))
-        # self.tiles[-1].addCounty(County.County('1415'))
-        #
-        self.tiles.append(Tile.Tile('34UEE', "N:/S2GLCextension/S2glcPoland2020/data/LC_DB/CLCFilteredByHRL/34UEE.tif"))
+        self.tiles.append(Tile.Tile('34UED', r"G:/_temp/BDOT_to_samples/s2a_pol_msil2a_20200419t094031_n0214_r036_t34ued.safe.tif"))
+        self.tiles[-1].addCounty(County.County('1433'))
+        self.tiles[-1].addCounty(County.County('1461'))
+        self.tiles[-1].addCounty(County.County('2003'))
+        self.tiles[-1].addCounty(County.County('1416'))
+        self.tiles[-1].addCounty(County.County('1426'))
+        self.tiles[-1].addCounty(County.County('1435'))
+        self.tiles[-1].addCounty(County.County('1411'))
+        self.tiles[-1].addCounty(County.County('1412'))
+        self.tiles[-1].addCounty(County.County('2010'))
+        self.tiles[-1].addCounty(County.County('1429'))
+        self.tiles[-1].addCounty(County.County('2013'))
+        self.tiles[-1].addCounty(County.County('1408'))
+        self.tiles[-1].addCounty(County.County('1424'))
+        self.tiles[-1].addCounty(County.County('1465'))
+        self.tiles[-1].addCounty(County.County('1434'))
         self.tiles[-1].addCounty(County.County('2062'))
-        self.tiles[-1].addCounty(County.County('2806'))
-        self.tiles[-1].addCounty(County.County('2810'))
         self.tiles[-1].addCounty(County.County('1422'))
         self.tiles[-1].addCounty(County.County('2006'))
-        self.tiles[-1].addCounty(County.County('2012'))
-        self.tiles[-1].addCounty(County.County('2801'))
-        self.tiles[-1].addCounty(County.County('2004'))
-        self.tiles[-1].addCounty(County.County('2805'))
-        self.tiles[-1].addCounty(County.County('2817'))
-        self.tiles[-1].addCounty(County.County('2808'))
         self.tiles[-1].addCounty(County.County('2002'))
-        self.tiles[-1].addCounty(County.County('2819'))
-        self.tiles[-1].addCounty(County.County('2813'))
         self.tiles[-1].addCounty(County.County('2014'))
         self.tiles[-1].addCounty(County.County('2008'))
-        self.tiles[-1].addCounty(County.County('2814'))
         self.tiles[-1].addCounty(County.County('2007'))
-        self.tiles[-1].addCounty(County.County('2816'))
         self.tiles[-1].addCounty(County.County('1415'))
+        #
+        # self.tiles.append(Tile.Tile('34UEE', "N:/S2GLCextension/S2glcPoland2020/data/LC_DB/CLCFilteredByHRL/34UEE.tif"))
+        # self.tiles[-1].addCounty(County.County('2062'))
+        # self.tiles[-1].addCounty(County.County('2806'))
+        # self.tiles[-1].addCounty(County.County('2810'))
+        # self.tiles[-1].addCounty(County.County('1422'))
+        # self.tiles[-1].addCounty(County.County('2006'))
+        # self.tiles[-1].addCounty(County.County('2012'))
+        # self.tiles[-1].addCounty(County.County('2801'))
+        # self.tiles[-1].addCounty(County.County('2004'))
+        # self.tiles[-1].addCounty(County.County('2805'))
+        # self.tiles[-1].addCounty(County.County('2817'))
+        # self.tiles[-1].addCounty(County.County('2808'))
+        # self.tiles[-1].addCounty(County.County('2002'))
+        # self.tiles[-1].addCounty(County.County('2819'))
+        # self.tiles[-1].addCounty(County.County('2813'))
+        # self.tiles[-1].addCounty(County.County('2014'))
+        # self.tiles[-1].addCounty(County.County('2008'))
+        # self.tiles[-1].addCounty(County.County('2814'))
+        # self.tiles[-1].addCounty(County.County('2007'))
+        # self.tiles[-1].addCounty(County.County('2816'))
+        # self.tiles[-1].addCounty(County.County('1415'))
 
     def prepareData(self, workdir, bdotMainDirPath, percent):
         self.workdir = workdir
