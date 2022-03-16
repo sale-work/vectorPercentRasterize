@@ -1,7 +1,7 @@
 import sys
-
+import os
 import Rasterizer
-
+os.environ["GDAL_DATA"] = r'C:\OSGeo4W64\share\gdal'
 
 def main(argv):
     bdotMainDirPath = "G:/_temp/BDOT_to_samples/bdot"

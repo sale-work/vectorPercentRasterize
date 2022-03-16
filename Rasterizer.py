@@ -41,22 +41,22 @@ class Rasterizer:
         self.fillTilesWithCounties()
 
     def fillBdotClasses(self):
-        self.BdotClasses.append(BdotClass.BdotClass('BUBD', 62))
+        # self.BdotClasses.append(BdotClass.BdotClass('BUBD', 62))
         # self.BdotClasses.append(BdotClass.BdotClass('PTKM', 62))
         # self.BdotClasses.append(BdotClass.BdotClass('SKDR', 62))
         # self.BdotClasses.append(BdotClass.BdotClass('OIMK', 105))
         # self.BdotClasses.append(BdotClass.BdotClass('OISZ', 105))
         #
         # self.BdotClasses.append(BdotClass.BdotClass('PTRK', 103))
-        # self.BdotClasses.append(BdotClass.BdotClass('PTTR', 102, "X_KOD ='PTTR01'"))
-        # self.BdotClasses.append(BdotClass.BdotClass('PTTR', 73, "X_KOD ='PTTR02'"))
-        # self.BdotClasses.append(BdotClass.BdotClass('PTLZ', 83, "RODZAJ='Las' and KATEGORIA='lisciasty'"))
+        # self.BdotClasses.append(BdotClass.BdotClass('PTTR', 102, "x_kod ='PTTR01'"))
+        self.BdotClasses.append(BdotClass.BdotClass('PTTR', 73, "x_kod ='PTTR02'"))
+        # self.BdotClasses.append(BdotClass.BdotClass('PTLZ', 83, "rodzaj='Las' and kategoria='lisciasty'"))
         # #
-        # self.BdotClasses.append(BdotClass.BdotClass('PTLZ', 83, "RODZAJ='Las' and KATEGORIA='iglasty'"))
+        # self.BdotClasses.append(BdotClass.BdotClass('PTLZ', 83, "rodzaj='Las' and kategoria='iglasty'"))
         # self.BdotClasses.append(BdotClass.BdotClass('PTWP', 162))
         # #
         # self.BdotClasses.append(BdotClass.BdotClass('PTGN', 121)) #, "rodzaj='piargUsypiskoRumowiskoSkalne'"
-        # self.BdotClasses.append(BdotClass.BdotClass('PTWZ', 121, "X_KOD ='PTWZ01'"))
+        # self.BdotClasses.append(BdotClass.BdotClass('PTWZ', 121, "x_kod ='PTWZ01'"))
         ###
         # self.BdotClasses.append(BdotClass.BdotClass('PTWP', 3))
         #
@@ -454,7 +454,7 @@ class Rasterizer:
         # self.tiles[-1].addCounty(County.County('2601'))
         # self.tiles[-1].addCounty(County.County('2604'))
 
-        self.tiles.append(Tile.Tile('34UED', r"G:/_temp/BDOT_to_samples/s2a_pol_msil2a_20200419t094031_n0214_r036_t34ued.safe.tif"))
+        self.tiles.append(Tile.Tile('34UED', r"G:/_temp/BDOT_to_samples/s2a_pol_sub_msil2a_20200419t094031_n0214_r036_t34ued.safe.tif"))
         self.tiles[-1].addCounty(County.County('1433'))
         self.tiles[-1].addCounty(County.County('1461'))
         self.tiles[-1].addCounty(County.County('2003'))
